@@ -230,11 +230,11 @@ with ThreadPoolExecutor(max_workers=4) as executor:
 ## RL Framework Support
 Gymnasium Support
 This environment includes a Gymnasium wrapper, allowing it to be used with standard RL libraries like Stable-Baselines3 or Ray Rllib.
-
-#env = PowerGridGymEnv(endpoint="http://localhost:8000")
+```python
+# env = PowerGridGymEnv(endpoint="http://localhost:8000")
 model = PPO("MlpPolicy", env, verbose=1)
 model.learn(total_timesteps=10000)
-
+```
 ## Development & Testing
 ---Gymnasium Support
 This environment includes a Gymnasium wrapper, allowing it to be used with standard RL libraries like Stable-Baselines3 or Ray Rllib.
