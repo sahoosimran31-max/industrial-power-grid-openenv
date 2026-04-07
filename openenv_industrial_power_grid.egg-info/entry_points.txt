@@ -1,2 +1,0 @@
-[console_scripts]
-server = industrial_power_grid.server.app:main
