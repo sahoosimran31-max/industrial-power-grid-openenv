@@ -35,13 +35,9 @@ except Exception as e:  # pragma: no cover
         "openenv is required for the web interface. Install dependencies with '\n    uv sync\n'"
     ) from e
 
-try:
-    from ..models import IndustrialPowerGridAction, IndustrialPowerGridObservation
-    from .industrial_power_grid_environment import IndustrialPowerGridEnvironment
-except ModuleNotFoundError:
-    from models import IndustrialPowerGridAction, IndustrialPowerGridObservation
-    from server.industrial_power_grid_environment import IndustrialPowerGridEnvironment
-
+# Import models and environment using relative imports
+from .models import IndustrialPowerGridAction, IndustrialPowerGridObservation
+from .industrial_power_grid_environment import IndustrialPowerGridEnvironment
 
 # Create the app with web interface and README integration
 app = create_app(

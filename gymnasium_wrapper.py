@@ -25,11 +25,23 @@ class PowerGridGymEnv(gym.Env):
 
     def step(self, action):
         # Send action to your FastAPI server
-        payload = {"action": int(action)}
+        payload = {
+            "action": {
+                "action": int(action),
+                "message": "step_action"  # Non-empty message for OpenEnv
+            }
+        }
         response = requests.post(f"{self.endpoint}/step", json=payload).json()
         
-        obs = np.array([response['observation']['grid_load'], 0.0, 0.0], dtype=np.float32)
-        reward = response['reward']
-        done = response['done']
+        obs = np.array([
+            float(response['observation']['is_demand_met']), 
+            response['observation']['carbon_footprint'], 
+            1.0 if response['observation']['grid_stability'] == "STABLE" else 0.0
+        ], dtype=np.float32)
+        
+        reward = response.get('reward', 0.0)
+        done = response.get('terminated', False)  # OpenEnv uses 'terminated'
         
         return obs, reward, done, False, {}
+
+    

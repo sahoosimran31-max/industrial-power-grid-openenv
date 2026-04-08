@@ -135,6 +135,24 @@ The reward is calculated as: `message_length × 0.1`
 - "Hi" → reward: 0.2
 - "Hello, World!" → reward: 1.3
 - Empty message → reward: 0.0
+  
+## How to Run (The most important part)
+You should provide both options here to be safe:
+
+Option A (Using uv):
+Bash
+uv run server
+
+Option B (Using standard Python):
+
+Bash
+python -m uvicorn server.app:app --host 0.0.0.0 --port 8000
+
+## API Documentation
+where to see the result?
+
+Once the server is running, open your browser to:
+http://localhost:8000/docs
 
 ## Advanced Usage
 
@@ -209,8 +227,21 @@ def run_episode(client_id: int):
 with ThreadPoolExecutor(max_workers=4) as executor:
     results = list(executor.map(run_episode, range(4)))
 ```
-
+## RL Framework Support
+Gymnasium Support
+This environment includes a Gymnasium wrapper, allowing it to be used with standard RL libraries like Stable-Baselines3 or Ray Rllib.
+```python
+# env = PowerGridGymEnv(endpoint="http://localhost:8000")
+model = PPO("MlpPolicy", env, verbose=1)
+model.learn(total_timesteps=10000)
+```
 ## Development & Testing
+---Gymnasium Support
+This environment includes a Gymnasium wrapper, allowing it to be used with standard RL libraries like Stable-Baselines3 or Ray Rllib.
+
+env = PowerGridGymEnv(endpoint="http://localhost:8000")
+model = PPO("MlpPolicy", env, verbose=1)
+model.learn(total_timesteps=10000)
 
 ### Direct Environment Testing
 

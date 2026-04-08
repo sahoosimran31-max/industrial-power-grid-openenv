@@ -1,0 +1,32 @@
+spec_version: 1
+name: industrial_power_grid
+type: space
+runtime: fastapi
+app: server.app:app
+port: 8000
+
+# Meta Round 1 Requirements: 3 Tasks with Scores
+tasks:
+  - id: stabilize_grid_low
+    name: "Task 1: Low Demand Stabilization"
+    description: "The AI must activate exactly one power source to meet low demand."
+    difficulty: easy
+    score_threshold: 0.7
+
+  - id: optimize_green_energy
+    name: "Task 2: Medium Demand Efficiency"
+    description: "The AI must balance Solar and Wind to meet medium demand without backup."
+    difficulty: medium
+    score_threshold: 0.85
+
+  - id: emergency_blackout_prevention
+    name: "Task 3: High Demand Peak"
+    description: "The AI must use all sources, including the battery, to prevent a blackout."
+    difficulty: hard
+    score_threshold: 1.0
+
+# Documentation for the AI
+metadata:
+  action_space: "Discrete(3) - Toggles for Solar, Wind, and Battery"
+  observation_space: "JSON object with demand_met, carbon_footprint, and stability"
+  real_world_context: "Industrial Power Grid Management"
